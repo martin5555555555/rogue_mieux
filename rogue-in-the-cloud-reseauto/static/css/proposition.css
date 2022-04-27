@@ -11,6 +11,7 @@ body{
 
 }
 
+
 #column{
     display :flex;
     flex-direction: column;
@@ -18,15 +19,7 @@ body{
     background-color: darkgray;
 }
 
-#start{
-    height: 100px;
-    width: 400px;
-    font-family: fantasy;
-    font-size: xx-large;
-
-}
-
-#nom_partie{
+button{
     height: 100px;
     width: 400px;
     font-family: fantasy;
