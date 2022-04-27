@@ -1,3 +1,5 @@
+
+
 body{
     background-color: slategray;
     width: 100%;
@@ -13,7 +15,7 @@ body{
     height: 5%;
     background-color: antiquewhite;
     color: darkslategrey;
-    font-size:400%;
+    font-size:300%;
     font-family: fantasy;
     animation-duration: 3s;
     animation-name: slideintitle;
@@ -25,7 +27,7 @@ body{
 @keyframes slideintitle {
     from {
       margin-left: 100%;
-      width: 300%;
+      width: 200%;
     }
   
     to {
@@ -80,19 +82,19 @@ body{
 
 
 .wall{
-    height: 40px;
+    height: 30px;
     width:20px;
     background-color:rgb(115, 138, 168);
 }
 
 .road{
-    height: 40px;
+    height: 30px;
     width: 20px;
     background-color: rgb(175, 229, 131);
 }
 
 .caracter{
-    height: 40px;
+    height: 30px;
     width:  20px;
     background-color: blueviolet;    
 }
