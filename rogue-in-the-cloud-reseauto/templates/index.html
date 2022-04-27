@@ -5,7 +5,7 @@
         <script type="text/javascript" src={{ url_for("static", filename="js/main.js") }}></script>
     </head>
     <body>
-        <div> <b> Rogue Flask </b></div>
+        <div class = "title"> <b> Rogue Online  </b></div>
 
         <div class="flexbox">
             <div class="thekeypad">
@@ -22,9 +22,23 @@
 
             <div id="console" style="font-family: monospace;">
                 {% for i in range(n_row) %}
-                <div style="height:18px">
+                <div class = "line" >
                     {% for j in range(n_col) %}
-                    <span id="{{ 'cell {}-{}'.format(i,j) }}"> {{ mapdata[i][j] }} </span>
+                        {% if mapdata[i][j] == "#" %}
+                            <div class="wall" id="{{ 'cell {}-{}'.format(i,j) }}" > 
+                            {{ "  " }} 
+                            </div>
+                        {% endif %}
+                        {% if mapdata[i][j] == "." %}
+                            <div class="road" id="{{ 'cell {}-{}'.format(i,j) }}"> 
+                            {{"  "}} 
+                            </div>
+                        {% endif %}
+                        {% if mapdata[i][j] == "@" %}
+                            <div class="caracter" id="{{ 'cell {}-{}'.format(i,j) }}"> 
+                            {{"  "}} 
+                            </div>
+                        {% endif %}
                     {% endfor %}
                 </div>
                 {% endfor %}
