@@ -1,3 +1,6 @@
+from operator import ne
+
+
 class Player:
     def __init__(self, id_user, symbol="@"):
         self.id_user = id_user
@@ -6,6 +9,7 @@ class Player:
         self._y = None
         self._xmem = None
         self._ymem = None
+        self._vie = 100
 
     def initPos(self, _map):
         n_row = len(_map)
@@ -37,6 +41,10 @@ class Player:
             data = [{"i": f"{self._y}", "j":f"{self._x}", "content":"x"}, {"i": f"{new_y}", "j":f"{new_x}", "content":self._symbol}]
             self._x = new_x
             self._y = new_y
+
+            
+
+           
         else:
             ret = False
             data = []

@@ -23,10 +23,10 @@ window.addEventListener("DOMContentLoaded", (event) => {
     document.onkeydown = function(e){
         switch(e.keyCode){
             case 37:
-                socket.emit("move", {dx:-1, dy:0, id_user: id_user});
+                socket.emit("move", {dx:-1, dy:0, id_user : id_user});
                 break;
             case 38:
-                socket.emit("move", {dx:0, dy:-1, id_user: id_user});
+                socket.emit("move", {dx:0, dy:-1, id_user : id_user});
                 break;
             case 39:
                 socket.emit("move", {dx:1, dy:0, id_user: id_user});
@@ -82,6 +82,8 @@ window.addEventListener("DOMContentLoaded", (event) => {
             span_to_modif.textContent = data[i].content;
         }
     });
+
+    
 
     
 

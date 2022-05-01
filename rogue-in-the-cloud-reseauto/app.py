@@ -35,6 +35,8 @@ def newgame(nom_partie):
     dico_correspondance[str(id_user)] = number_players
     number_players += 1
     game.add_player(str(id_user))
+    game.add_monsters("monstre_1")
+
     global partie_des_joueurs
     partie_des_joueurs = {id_user: nom_partie}
     partie_en_cours[nom_partie] = game, dico_correspondance, number_players
@@ -79,9 +81,10 @@ def on_move_msg(json, methods=["GET", "POST"]):
     print(dico_correspondance)
     numero_joueur = dico_correspondance[id_user]
     
-    data, ret = game.move(dx,dy, numero_joueur)
+    data, ret, animation_json = game.move(dx,dy, numero_joueur)
     if ret:
         socketio.emit("response", data)
+        socketio.emit("animation", animation_json )
 
 @socketio.on("memorize")
 
