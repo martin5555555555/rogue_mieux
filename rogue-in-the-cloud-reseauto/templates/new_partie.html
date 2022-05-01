@@ -1,11 +1,13 @@
 <html>
     <head>
+        <link rel="stylesheet" type="text/css" href={{ url_for("static", filename="css/new_game.css") }}>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.4.1/socket.io.min.js"></script>
-        <script type="text/javascript" src={{ url_for("static", filename="js/new_partie.js") }}></script>
+        <script type="text/javascript" src={{ url_for("static", filename="js/new_game.js") }}></script>
     </head>
     <body>
-        <input id = "nom_partie" name = "Nom Partie">
-        <button id = "start"> Start Game</button>
-
+        <p id="column">
+            <input id = "nom_partie" name = "Nom Partie">
+            <button id = "start"> Start Game</button>
+        </p>
     </body>
 </html>

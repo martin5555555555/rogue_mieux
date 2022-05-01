@@ -1,6 +1,6 @@
 <html>
     <head>
-
+        <link rel="stylesheet" type="text/css" href={{ url_for("static", filename="css/proposition.css") }}>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.4.1/socket.io.min.js"></script>
         <script src = {{ url_for("static", filename="js/require.js") }} ></script>
         <script type="text/javascript" src ={{ url_for("static", filename="js/proposition.js") }}  ></script>
@@ -8,10 +8,11 @@
 
     </head>
     <body>
-        <button id = new> New</button>
-
-        {% for partie in parties.keys() %}
-        <button id ="{{ '{}'.format(partie) }}"> {{partie}}</button>
-        {% endfor %}
+        <p id = "column">
+            <button id = new> New</button>
+            {% for partie in parties.keys() %}
+                <button id ="{{ '{}'.format(partie) }}"> {{partie}}</button>
+            {% endfor %}
+        </p>
     </body>
 </html>
