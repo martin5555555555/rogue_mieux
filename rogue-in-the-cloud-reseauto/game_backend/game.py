@@ -17,6 +17,7 @@ class Game:
 
     def move(self, dx, dy, numero_player):
         animation = {"name": ""}
+        die = False #le joueur n'est pas mort
         player = self._players[numero_player]
         data, ret = player.move(dx, dy, self._map)
         new_x = player._x
@@ -25,14 +26,20 @@ class Game:
         for monster in self._monsters:
             x = monster._x
             y = monster._y
-
-            if (abs(x-new_x) < monster._range) and (abs(y - new_y) < monster._range):
+            print(abs(x-new_y))
+            if (abs(x-new_y) < monster._range) and (abs(y - new_x) < monster._range):
+                print('zone de danger')
                 json = {"name" : monster._name, "range" : str(monster._range), "x":str(monster._x), "y": str(monster._y)}
                 animation =  json
 
                 player._vie += - monster._damage
+                print(player._vie)
+
+            if player._vie <= 0 :
+                player.die(self._map)
+                die = True
                     
-        return data, ret, animation
+        return data, ret, animation, die
     
     
     def add_player(self, id_user):

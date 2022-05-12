@@ -16,7 +16,7 @@ class Monstre_1(Monstre):
     def __init__(self, name):
         super().__init__(name)
         self._vie = 100
-        self._range = 3
+        self._range = 2
         self._damage = 10
         self._symbole = "O"
     
@@ -52,7 +52,7 @@ class Monstre_1(Monstre):
         alentours_y = [y-1, y, y+1]
         for x in alentours_x:
             for y in alentours_y:
-                if x<x_max and y<_ymax:
+                if x<x_max and y<y_max:
                     map_inter[x][y] = 'O'
         game._map = map_inter
         

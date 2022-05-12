@@ -1,10 +1,12 @@
-from flask import Flask, render_template, make_response
+from flask import Flask, g, render_template, make_response
 from flask_socketio import SocketIO
 from flask import request
 from pyparsing import *
 import requests
-from game_backend import Game
+from game_backend import Game, player
 import uuid
+
+from game_backend.Projectiles import Fireball
 
 app = Flask(__name__)
 socketio = SocketIO(app)
@@ -44,7 +46,9 @@ def newgame(nom_partie):
     
 
     map = game.getMap()
-    temp  = render_template("index.html", mapdata =map, n_row=len(map), n_col=len(map[0]) )
+    player = game._players[0]
+    print(player._vie)
+    temp  = render_template("index.html", mapdata =map, n_row=len(map), n_col=len(map[0]), vie = str(player._vie) )
     resp = make_response(temp)
     return resp
 
@@ -56,10 +60,15 @@ def join_partie(nom_partie):
         dico_correspondance[str(id_user)] = number_players
         number_players += 1
         game.add_player(str(id_user))
+    
     partie_en_cours[nom_partie] = game, dico_correspondance, number_players
     partie_des_joueurs[id_user] = nom_partie
     map = game.getMap()
-    temp  = render_template("index.html", mapdata =map, n_row=len(map), n_col=len(map[0]) )
+    player = game._players[dico_correspondance[id_user]]
+    if not player._is_alive:
+        temp = render_template("die.html")
+    else :
+        temp  = render_template("index.html", mapdata =map, n_row=len(map), n_col=len(map[0]), vie = str(player._vie) )
     return temp
 
 
@@ -81,13 +90,42 @@ def on_move_msg(json, methods=["GET", "POST"]):
     print(dico_correspondance)
     numero_joueur = dico_correspondance[id_user]
     
-    data, ret, animation_json = game.move(dx,dy, numero_joueur)
+    data, ret, animation_json, die = game.move(dx,dy, numero_joueur)
+    
+    if die:
+        socketio.emit("die")
+
     if ret:
         socketio.emit("response", data)
         socketio.emit("animation", animation_json )
+    
+@socketio.on("shot")
+def ignit_fireball(json):
+    print("ignition")
+    id_user = json["id_user"]
+    dx = json["dx"]
+    dy = json["dy"]
+    print(id_user)
+    nom_partie = partie_des_joueurs[id_user]
+    game, dico_correspondance, number_players = partie_en_cours[nom_partie]
+    print(dico_correspondance)
+    numero_joueur = dico_correspondance[id_user]
+    player = game._players[numero_joueur]
+    fireball = Fireball("fireball")
+    fireball.init_placement(player, (0,1))
+    map = game.getMap()
+    x = fireball._x
+    y = fireball._y
+    data = {"x" : str(x), "y": str(y), "dx" :str(dx), "dy" :str(dy), "symbole" : fireball._symbole, "x_max" : str(len(map)), "y_max" : str(len(map[0]))}
+    socketio.emit("ignit_fireball", data)
+    
 
-@socketio.on("memorize")
+    
 
+@app.route("/die/")
+def die():
+    temp = render_template("die.html")
+    return temp
 
 
 @socketio.on("deconnection")

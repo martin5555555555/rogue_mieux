@@ -10,6 +10,7 @@ class Player:
         self._xmem = None
         self._ymem = None
         self._vie = 100
+        self._is_alive = True
 
     def initPos(self, _map):
         n_row = len(_map)
@@ -34,18 +35,24 @@ class Player:
         new_x = self._x + dx
         new_y = self._y + dy
 
-        if map[new_y][new_x] == "." or map[new_y][new_x] == "x" :
+        if (map[new_y][new_x] == "." or map[new_y][new_x] == "x" ) and self._is_alive:
             ret =True
             map[new_y][new_x] = self._symbol
             map[self._y][self._x] = "x"
-            data = [{"i": f"{self._y}", "j":f"{self._x}", "content":"x"}, {"i": f"{new_y}", "j":f"{new_x}", "content":self._symbol}]
+            data = [{"i": f"{self._y}", "j":f"{self._x}", "content":"x"}, {"i": f"{new_y}", "j":f"{new_x}", "content":self._symbol}, {"vie": f"{self._vie}"}]
             self._x = new_x
             self._y = new_y
-
-            
+    
 
            
         else:
             ret = False
-            data = []
+            data = [{"vie" : f"{self._vie}"}]
         return data, ret
+
+    def die(self, map):
+        self._symbol = 't'
+        self._is_alive = False
+        map[self._y][self._x] = self._symbol
+
+            
