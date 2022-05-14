@@ -1,3 +1,4 @@
+from glob import glob
 from flask import Flask, g, render_template, make_response
 from flask_socketio import SocketIO
 from flask import request
@@ -18,6 +19,7 @@ dico_correspondance = {}
 info_partie = {'partie_en_cours': False, 'info_partie': {}}
 partie_en_cours = {}
 partie_des_joueurs = {}
+direction = (0,0)
 
 
 @app.route("/")
@@ -81,8 +83,10 @@ def choix_new_partie():
 @socketio.on("move")
 def on_move_msg(json, methods=["GET", "POST"]):
     print("received move ws message")
+    global direction
     dx = json['dx']
     dy = json["dy"]
+    direction = (dx, dy)
     id_user = json["id_user"]
     print(partie_des_joueurs)
     nom_partie = partie_des_joueurs[id_user]
@@ -101,10 +105,11 @@ def on_move_msg(json, methods=["GET", "POST"]):
     
 @socketio.on("shot")
 def ignit_fireball(json):
+    global direction
     print("ignition")
     id_user = json["id_user"]
-    dx = json["dx"]
-    dy = json["dy"]
+    dx = direction[0]
+    dy = direction[1]
     print(id_user)
     nom_partie = partie_des_joueurs[id_user]
     game, dico_correspondance, number_players = partie_en_cours[nom_partie]
@@ -112,7 +117,7 @@ def ignit_fireball(json):
     numero_joueur = dico_correspondance[id_user]
     player = game._players[numero_joueur]
     fireball = Fireball("fireball")
-    fireball.init_placement(player, (0,1))
+    fireball.init_placement(player, direction)
     map = game.getMap()
     x = fireball._x
     y = fireball._y

@@ -42,7 +42,7 @@ window.addEventListener("DOMContentLoaded", (event) => {
                 console.log(id_user)
                 break;
             case 27:
-                socket.emit("shot", {id_user : id_user, dx: 0, dy: 1})
+                socket.emit("shot", {id_user : id_user})
                 console.log("shot lancé")
         }
 
@@ -109,7 +109,7 @@ window.addEventListener("DOMContentLoaded", (event) => {
         var symbole = data.symbole
 
         x= `${parseInt(x)+parseInt(dx)}`;
-            y= `${parseInt(y)+parseInt(dy)}`;
+        y= `${parseInt(y)+parseInt(dy)}`;
 
             var cell_id = "cell " + y + "-" + x;
             console.log(cell_id)
@@ -169,7 +169,7 @@ window.addEventListener("DOMContentLoaded", (event) => {
 
 
             socket.on('monster_died', (json)=>{
-                console.log('monsyrt_died')
+                console.log('monster_died')
                 x = json.x
                 y = json.y
                 symbole = json.symbole
