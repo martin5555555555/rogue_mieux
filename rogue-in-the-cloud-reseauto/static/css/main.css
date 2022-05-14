@@ -99,6 +99,18 @@ body{
     background-color: blueviolet;    
 }
 
+.border{
+    height: 30px;
+    width:  20px;
+    background-color: rgb(188, 154, 219);    
+}
+
+.monster{
+    height: 30px;
+    width:  20px;
+    background-color: rgb(175, 50, 50);    
+}
+
 .line{
     width: 100%;
     background-color: aliceblue;
