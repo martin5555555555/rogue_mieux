@@ -1,29 +1,53 @@
+function uuidv4() {
+    return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+      var r = Math.random() * 16 | 0, v = c == 'x' ? r : (r & 0x3 | 0x8);
+      return v.toString(16);
+    });
+  }
+  
+  
+  function setCookie(cname, cvalue, exdays) {
+    const d = new Date();
+    d.setTime(d.getTime() + (exdays*24*60*60*1000));
+    let expires = "expires="+ d.toUTCString();
+    document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+  }
+  
+  function getCookie(cname) {
+      let name = cname + "=";
+      let decodedCookie = decodeURIComponent(document.cookie);
+      let ca = decodedCookie.split(';');
+      for(let i = 0; i <ca.length; i++) {
+        let c = ca[i];
+        while (c.charAt(0) == ' ') {
+          c = c.substring(1);
+        }
+        if (c.indexOf(name) == 0) {
+          return c.substring(name.length, c.length);
+        }
+      }
+      return "undefined_id";
+    }
+  
+
 function pause(secondes){
 let now = Date.now(),
       end = now + 1000 * secondes;
   while (now < end) { now = Date.now(); }
 };
-function getCookie(cname) {
-    let name = cname + "=";
-    let decodedCookie = decodeURIComponent(document.cookie);
-    let ca = decodedCookie.split(';');
-    for(let i = 0; i <ca.length; i++) {
-      let c = ca[i];
-      while (c.charAt(0) == ' ') {
-        c = c.substring(1);
-      }
-      if (c.indexOf(name) == 0) {
-        return c.substring(name.length, c.length);
-      }
-    }
-    return "";
-  }
+
 
 window.addEventListener("DOMContentLoaded", (event) => {
     console.log("coucou")
     var socket = io.connect("http://" + document.domain + ":" + location.port );
     socket.emit("connection", {domain : document.domain})
-    id_user = getCookie("id_user")
+    var id_user = getCookie("id_user")
+    console.log(id_user) 
+    if (id_user == "undefined_id"){
+      var id_user = uuidv4();
+      console.log(id_user + 'djkfk')
+      setCookie("id_user", id_user, 7 )
+    }
     console.log(id_user)
 
     document.onkeydown = function(e){

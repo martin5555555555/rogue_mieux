@@ -36,7 +36,7 @@ window.addEventListener("DOMContentLoaded", (event) => {
 
     var id_user = getCookie("id_user")
     console.log(id_user) 
-    if (id_user = "undefined_id"){
+    if (id_user == "undefined_id"){
       var id_user = uuidv4();
       console.log(id_user + 'djkfk')
       setCookie("id_user", id_user, 7 )
