@@ -116,48 +116,78 @@ window.addEventListener("DOMContentLoaded", (event) => {
             var span_to_modif = document.getElementById(cell_id);
             var anciant_value = span_to_modif;
             console.log(anciant_value)
-            span_to_modif.textContent = symbole;
-            var restart = true;
-        
-        while (restart){ //&& (parseInt(x)< parseInt(y_max)-2) && (parseInt(y)< parseInt(x_max)-2)){
-            console.log("fireball progressing");
-            
-            restart = false;
-            console.log(restart)
-
-
-            
-            
+            span_to_modif.textContent = symbole;        
 
             x= `${parseInt(x)+parseInt(dx)}`;
             y= `${parseInt(y)+parseInt(dy)}`;
 
 
 
-                setInterval(
+            const deplacer_fireball =  setInterval(
                 () =>{
                 var cell_id = "cell " + y + "-" + x;
                 console.log(cell_id)
                 var span_to_modif = document.getElementById(cell_id);
+                console.log((span_to_modif.textContent));
+                if (span_to_modif.textContent.trim() != '.'){
+                    clearInterval(deplacer_fireball)
+                    console.log("obstacle atteint");
+                    im = span_to_modif.textContent.trim();
+                    switch (im) {
+                        case '#':
+                            symbole = span_to_modif.textContent;
+                            break;
+                        case 'O':
+                            console.log("monster touched")
+                            symbole = span_to_modif.textContent;
+                            socket.emit("monster touched", {"x": x, "y": y, "id_user":id_user});
+
+
+                    }
+                    
+                }
                 console.log(anciant_value)
                 span_to_modif.textContent = symbole;
                 console.log("replace");
                 anciant_value.textContent = '.'
-                anciant_value = span_to_modif;
                 x= `${parseInt(x)+parseInt(dx)}`;
                 y= `${parseInt(y)+parseInt(dy)}`;
+                console.log(anciant_value.textContent)
+                
+                anciant_value = span_to_modif;
+
                 
                 console.log(x)
 
 
-                
+                  
             },1000, `${parseInt(x)+parseInt(dx)}`, `${parseInt(y)+parseInt(dy)}`, anciant_value
             );
+            
+        
+    } )
+
+
+            socket.on('monster_died', (json)=>{
+                console.log('monsyrt_died')
+                x = json.x
+                y = json.y
+                symbole = json.symbole
+                var cell_id = "cell " + y + "-" + x;
+                var span_to_modif = document.getElementById(cell_id);
+                span_to_modif.textContent = symbole;
+            });
+
+
+
+                
+
+
            
         
 
             
-            };
+            
         
         
 
@@ -173,7 +203,7 @@ window.addEventListener("DOMContentLoaded", (event) => {
 
       
 
-    } )
+   
     socket.on("die", function(){
         console.log("player died");
         window.location = 'http://127.0.0.1:5001/die/';

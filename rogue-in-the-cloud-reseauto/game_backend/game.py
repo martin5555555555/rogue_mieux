@@ -52,6 +52,10 @@ class Game:
             monster.init_placement(self._map)
             self._monsters.append(monster)
     
+    def find_monsters(self, x, y):
+        for monster in self._monsters:
+            if monster._y ==x and monster._x == y:
+                return monster
    
     
         

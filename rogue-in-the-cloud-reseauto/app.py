@@ -120,7 +120,7 @@ def ignit_fireball(json):
     socketio.emit("ignit_fireball", data)
     
 
-    
+
 
 @app.route("/die/")
 def die():
@@ -135,8 +135,25 @@ def on_connection_msg(json, methods=["GET", "POST"]):
     global dico_correspondance
     global domain_lists
     
+
+@socketio.on("monster touched")
+def monster_hurt(json):
+    print("monster touched")
+    id_user = json["id_user"]
+    x = int(json["x"])
+    y = int(json["y"])
+    print(id_user)
+    nom_partie = partie_des_joueurs[id_user]
+    game, dico_correspondance, number_players = partie_en_cours[nom_partie]
+    print(x,y)
+    monster = game.find_monsters(x,y)
+    monster_die, data = monster.is_hurt(100, game.getMap())
+    print(monster._vie)
+    if monster_die:
+        socketio.emit("monster_died", data)
     
     
+
 
 def setcookie(resp):
     id_user = uuid.uuid1()

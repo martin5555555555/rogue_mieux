@@ -1,4 +1,5 @@
 from re import A
+from socket import socket
 import numpy as np
 
 class Monstre:
@@ -55,7 +56,21 @@ class Monstre_1(Monstre):
                 if x<x_max and y<y_max:
                     map_inter[x][y] = 'O'
         game._map = map_inter
+    def is_hurt(self, damage, map):
+        self._vie += - damage
+        if self._vie <=0:
+            return self.die(map) 
+        else:
+            return False, {}
         
+          
+
+    def die(self, map):
+        self._symbole = 'T'
+        self._damage = 0
+        map[self._x][self._y] = self._symbole
+        return True, {"x": self._y, "y": self._x, "symbole": self._symbole}
+
 
 
     
