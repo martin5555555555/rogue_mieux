@@ -211,6 +211,18 @@ window.addEventListener("DOMContentLoaded", (event) => {
     }
     )
 
+    var text = document.getElementById("text")
+    var wall = document.getElementsByClassName("wall")
+    var border = document.getElementsByClassName("border")
+    var caracter = document.getElementsByClassName("border")
+    var monster = document.getElementsByClassName("monster")
+    var caracter = document.getElementsByClassName("caracter")
+    var line = document.getElementsByClassName("line")
+    text.style.fontSize = String(document.getElementById("title").offsetWidth/30) + "%"
+    for(lines of line){
+        lines.style.height = String(document.getElementById("title").offsetWidth/150) + "px"
+        lines.style.colorBackground = "green"
+    }
     
 
     

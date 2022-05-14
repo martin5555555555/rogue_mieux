@@ -6,10 +6,11 @@
     <script type="text/javascript" src={{ url_for("static", filename="js/main.js") }}></script>
 </head>
 <body>
+    <div id = "conteneur">
     <audio id = "music" src = "https://universal-soundbank.com/sounds/14086.mp3" >
 
     </audio>
-    <div class = "title"> <b> <CENTER>Rogue Online </CENTER> </b></div>
+    <div id = "title"> <b> <CENTER>Rogue Online </CENTER> </b></div>
 
     <div class="flexbox">
         <div class="thekeypad">
@@ -57,7 +58,7 @@
             </div>
             {% endfor %}
         </div>
-        <div class="text">« Trois anneaux pour les Rois Elfes sous le ciel,
+        <div id="text">« Trois anneaux pour les Rois Elfes sous le ciel,
 
             Sept pour les Seigneurs Nains dans leurs demeures de pierre,
             
@@ -75,6 +76,6 @@
             
             Au pays de Mordor où s'étendent les Ombres. »</div>
     </div>
-
+    </div>
 </body>
 </html>
