@@ -1,36 +1,81 @@
-<html>
-    <head>
-        <link rel="stylesheet" type="text/css" href={{ url_for("static", filename="css/main.css") }}>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.4.1/socket.io.min.js"></script>
-        <script type="text/javascript" src={{ url_for("static", filename="js/main.js") }}></script>
-    </head>
-    <body>
-        <div> <b> Rogue Flask </b></div>
-        <div id = "Info joueurs">
-            <text id = "vie"> {{vie}} </text>   </div>
-        <div class="flexbox">
-            <div class="thekeypad">
-                <div class="key"></div>
-                <div class="key"><input id="go_n" class="keypad_btn" type="button" value="&#9650"> </div>
-                <div class="key"></div>
-                <div class="key"><input id="go_w" class="keypad_btn" type="button" value="&#9664"></div>
-                <div class="key"></div>
-                <div class="key"><input id="go_e" class="keypad_btn" type="button" value="&#9654"></div>
-                <div class="key"></div>
-                <div class="key"><input id="go_s" class="keypad_btn" type="button" value="&#9660"></div>
-                <div class="key"></div>
-            </div>
 
-            <div id="console" style="font-family: monospace;">
-                {% for i in range(n_row) %}
-                <div style="height:18px">
-                    {% for j in range(n_col) %}
-                    <span id="{{ 'cell {}-{}'.format(i,j) }}"> {{ mapdata[i][j] }} </span>
-                    {% endfor %}
-                </div>
-                {% endfor %}
-            </div>
+<html>
+<head>
+    <link rel="stylesheet" type="text/css" href={{ url_for("static", filename="css/main.css") }}>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.4.1/socket.io.min.js"></script>
+    <script type="text/javascript" src={{ url_for("static", filename="js/main.js") }}></script>
+</head>
+<body>
+    <div id = "conteneur">
+    <audio id = "music" src = "https://universal-soundbank.com/sounds/14086.mp3" >
+
+    </audio>
+    <div id = "title"> <b> <CENTER>Rogue Online </CENTER> </b></div>
+
+    <div class="flexbox">
+        <div class="thekeypad">
+            <div class="key"></div>
+            <div class="key"><input id="go_n" class="keypad_btn" type="button" value="&#9650"> </div>
+            <div class="key"></div>
+            <div class="key"><input id="go_w" class="keypad_btn" type="button" value="&#9664"></div>
+            <div class="key"></div>
+            <div class="key"><input id="go_e" class="keypad_btn" type="button" value="&#9654"></div>
+            <div class="key"></div>
+            <div class="key"><input id="go_s" class="keypad_btn" type="button" value="&#9660"></div>
+            <div class="key"></div>
         </div>
 
-    </body>
+        <div id="console" style="font-family: monospace;">
+            {% for i in range(n_row) %}
+            <div class = "line" >
+                {% for j in range(n_col) %}
+                    {% if mapdata[i][j] == "#" %}
+                        <div class="border" id="{{ 'cell {}-{}'.format(i,j) }}" > 
+                        {{ "  " }} 
+                        </div>
+                    {% endif %}
+                    {% if mapdata[i][j] == "." %}
+                        <div class="road" id="{{ 'cell {}-{}'.format(i,j) }}"> 
+                        {{"  "}} 
+                        </div>
+                    {% endif %}
+                    {% if mapdata[i][j] == "@" %}
+                        <div class="caracter" id="{{ 'cell {}-{}'.format(i,j) }}"> 
+                        {{"  "}} 
+                        </div>
+                    {% endif %}
+                    {% if mapdata[i][j] == "u" %}
+                        <div class="wall" id="{{ 'cell {}-{}'.format(i,j) }}"> 
+                        {{"  "}} 
+                        </div>
+                    {% endif %}
+                    {% if mapdata[i][j] == "O" %}
+                        <div class="monster" id="{{ 'cell {}-{}'.format(i,j) }}"> 
+                        {{"  "}} 
+                        </div>
+                    {% endif %}
+                {% endfor %}
+            </div>
+            {% endfor %}
+        </div>
+        <div id="text">« Trois anneaux pour les Rois Elfes sous le ciel,
+
+            Sept pour les Seigneurs Nains dans leurs demeures de pierre,
+            
+            Neuf pour les Hommes Mortels destinés au trépas,
+            
+            Un pour le Seigneur des Ténèbres sur son sombre trône
+            
+            Dans le Pays de Mordor où s'étendent les Ombres.
+            
+            Un anneau pour les gouverner tous,
+            
+            Un anneau pour les trouver,
+            
+            Un anneau pour les amener tous et dans les ténèbres les lier
+            
+            Au pays de Mordor où s'étendent les Ombres. »</div>
+    </div>
+    </div>
+</body>
 </html>
