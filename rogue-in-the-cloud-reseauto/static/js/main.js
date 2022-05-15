@@ -219,10 +219,11 @@ window.addEventListener("DOMContentLoaded", (event) => {
                 console.log('monster_died')
                 x = json.x
                 y = json.y
-                symbole = json.symbole
+                className = json.className
                 var cell_id = "cell " + y + "-" + x;
                 var span_to_modif = document.getElementById(cell_id);
-                span_to_modif.textContent = symbole;
+                span_to_modif.className = className;
+                console.log(span_to_modif.className)
             });
 
             

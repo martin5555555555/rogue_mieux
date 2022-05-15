@@ -70,7 +70,7 @@ class Monstre_1(Monstre):
         self._symbole = 'T'
         self._damage = 0
         map[self._x][self._y] = self._symbole
-        return True, {"x": self._y, "y": self._x, "symbole": self._symbole}
+        return True, {"x": self._y, "y": self._x, "className": "monster_dead"}
 
 
 

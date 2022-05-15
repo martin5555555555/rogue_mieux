@@ -127,6 +127,13 @@ body{
     width:  20px;
     background-color: rgb(175, 50, 50);    
 }
+
+.monster_dead{
+    height:100%;
+    width:  20px;
+    background-color: rgb(65, 175, 50);    
+}
+
 .fireball{
     height:100%;
     width:  20px;
