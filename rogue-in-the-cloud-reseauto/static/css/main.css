@@ -127,6 +127,11 @@ body{
     width:  20px;
     background-color: rgb(175, 50, 50);    
 }
+.fireball{
+    height:100%;
+    width:  20px;
+    background-color: rgb(0, 0, 0);    
+}
 
 .line{
     height: 10px;

@@ -20,6 +20,7 @@ class Monstre_1(Monstre):
         self._range = 2
         self._damage = 10
         self._symbole = "O"
+        self._className = "monster"
     
     def place(self, map):
         map[self._x][self._y] = self._symbole

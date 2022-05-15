@@ -121,7 +121,7 @@ def ignit_fireball(json):
     map = game.getMap()
     x = fireball._x
     y = fireball._y
-    data = {"x" : str(x), "y": str(y), "dx" :str(dx), "dy" :str(dy), "symbole" : fireball._symbole, "x_max" : str(len(map)), "y_max" : str(len(map[0]))}
+    data = {"x" : str(x), "y": str(y), "dx" :str(dx), "dy" :str(dy), "className" : fireball._className, "x_max" : str(len(map)), "y_max" : str(len(map[0]))}
     socketio.emit("ignit_fireball", data)
     
 

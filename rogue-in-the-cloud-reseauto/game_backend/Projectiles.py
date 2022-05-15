@@ -8,6 +8,7 @@ class Fireball(Projectile):
     def __init__(self, name):
         super().__init__(name)
         self._symbole = "o"
+        self._className = "fireball"
 
     def place(self, map):
         map[self._x][self._y] = self._symbole   

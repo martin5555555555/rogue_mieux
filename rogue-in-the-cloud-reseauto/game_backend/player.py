@@ -54,5 +54,6 @@ class Player:
         self._symbol = 't'
         self._is_alive = False
         map[self._y][self._x] = self._symbol
+        
 
             

@@ -134,6 +134,8 @@ window.addEventListener("DOMContentLoaded", (event) => {
             }
             block.innerText = " "
         }
+        var aff_vie = document.getElementById("vie");
+        aff_vie.textContent = data[2].vie
         
     });
     
@@ -147,7 +149,7 @@ window.addEventListener("DOMContentLoaded", (event) => {
         var dy = data.dy
         var x_max = data.x_max
         var y_max = data.y_max
-        var symbole = data.symbole
+        var className = data.className
 
         x= `${parseInt(x)+parseInt(dx)}`;
         y= `${parseInt(y)+parseInt(dy)}`;
@@ -157,7 +159,9 @@ window.addEventListener("DOMContentLoaded", (event) => {
             var span_to_modif = document.getElementById(cell_id);
             var anciant_value = span_to_modif;
             console.log(anciant_value)
-            span_to_modif.textContent = symbole;        
+            console.log("do")
+            console.log(span_to_modif.className)
+            span_to_modif.class = className;        
 
             x= `${parseInt(x)+parseInt(dx)}`;
             y= `${parseInt(y)+parseInt(dy)}`;
@@ -169,18 +173,18 @@ window.addEventListener("DOMContentLoaded", (event) => {
                 var cell_id = "cell " + y + "-" + x;
                 console.log(cell_id)
                 var span_to_modif = document.getElementById(cell_id);
-                console.log((span_to_modif.textContent));
-                if (span_to_modif.textContent.trim() != '.'){
+                console.log((span_to_modif.class));
+                if (span_to_modif.className != 'road'){
                     clearInterval(deplacer_fireball)
                     console.log("obstacle atteint");
-                    im = span_to_modif.textContent.trim();
+                    im = span_to_modif.className;
                     switch (im) {
-                        case '#':
-                            symbole = span_to_modif.textContent;
+                        case 'border':
+                            className = span_to_modif.className;
                             break;
-                        case 'O':
+                        case 'monster':
                             console.log("monster touched")
-                            symbole = span_to_modif.textContent;
+                            className = span_to_modif.className;
                             socket.emit("monster touched", {"x": x, "y": y, "id_user":id_user});
 
 
@@ -188,9 +192,9 @@ window.addEventListener("DOMContentLoaded", (event) => {
                     
                 }
                 console.log(anciant_value)
-                span_to_modif.textContent = symbole;
+                span_to_modif.className = className;
                 console.log("replace");
-                anciant_value.textContent = '.'
+                anciant_value.className = 'road'
                 x= `${parseInt(x)+parseInt(dx)}`;
                 y= `${parseInt(y)+parseInt(dy)}`;
                 console.log(anciant_value.textContent)
