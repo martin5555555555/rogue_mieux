@@ -40,8 +40,21 @@ body{
     }
 }
 
+.life{
+    background-color: aliceblue;
+    min-width: 70px;
+    min-height: 50px;
+    font-size: 200%;
+    justify-items: center;
+    font-style: italic;
+    border: 2px;
+    border-style: dashed;
+
+}
+
 #text{
     color: darkslategrey;
+    max-width: 600px;
     font-size: 150%;
     font-style: italic;
     font-family: fantasy;

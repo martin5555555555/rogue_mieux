@@ -81,6 +81,8 @@ window.addEventListener("DOMContentLoaded", (event) => {
         socket.emit("move", {dx:0, dy:-1});
         var audio = document.getElementById("music");
         audio.play();
+        
+        
     };
 
     var btn_s = document.getElementById("go_s");
@@ -89,6 +91,7 @@ window.addEventListener("DOMContentLoaded", (event) => {
         socket.emit("move", {dx:0, dy:1, id_user: id_user});
         var audio = document.getElementById("music");
         audio.play();
+        
     };
 
     var btn_w = document.getElementById("go_w");
@@ -109,7 +112,6 @@ window.addEventListener("DOMContentLoaded", (event) => {
 
 
     socket.on("response", function(data){
-        console.log(data);
         for( var i=0; i<2; i++){
             var cell_id = "cell " + data[i].i + "-" + data[i].j;
             console.log(cell_id);
@@ -117,9 +119,24 @@ window.addEventListener("DOMContentLoaded", (event) => {
             var span_to_modif = document.getElementById(cell_id);
             span_to_modif.textContent = data[i].content;
         }
-        var aff_vie = document.getElementById("vie");
-        aff_vie.textContent = data[2].vie
+        
+        console.log("ok")
+        for(block of document.getElementsByClassName("caracter")){
+            if(block.innerText ==="x"){
+                block.classList.replace("caracter", "road");
+                
+            }
+        }
+        for(block of document.getElementsByClassName("road")){
+            if(block.innerText ==="@"){
+                block.classList.replace("road", "caracter");
+                
+            }
+            block.innerText = " "
+        }
+        
     });
+    
     
     socket.on("ignit_fireball", async function(data){
         console.log("ignition fireball")
@@ -187,6 +204,8 @@ window.addEventListener("DOMContentLoaded", (event) => {
                   
             },1000, `${parseInt(x)+parseInt(dx)}`, `${parseInt(y)+parseInt(dy)}`, anciant_value
             );
+
+            
             
         
     } )
@@ -201,6 +220,8 @@ window.addEventListener("DOMContentLoaded", (event) => {
                 var span_to_modif = document.getElementById(cell_id);
                 span_to_modif.textContent = symbole;
             });
+
+            
 
 
 
@@ -235,14 +256,9 @@ window.addEventListener("DOMContentLoaded", (event) => {
     }
     )
 
-    var text = document.getElementById("text")
-    var wall = document.getElementsByClassName("wall")
-    var border = document.getElementsByClassName("border")
-    var caracter = document.getElementsByClassName("border")
-    var monster = document.getElementsByClassName("monster")
-    var caracter = document.getElementsByClassName("caracter")
+    
     var line = document.getElementsByClassName("line")
-    text.style.fontSize = String(document.getElementById("title").offsetWidth/30) + "%"
+    text.style.fontSize = String(document.getElementById("title").offsetWidth/50) + "%"
     for(lines of line){
         lines.style.height = String(document.getElementById("title").offsetWidth/150) + "px"
         lines.style.colorBackground = "green"
@@ -252,6 +268,8 @@ window.addEventListener("DOMContentLoaded", (event) => {
     
 
 });
+
+
 
 
 
