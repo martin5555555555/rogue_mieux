@@ -1,48 +1,13 @@
-# Rogue nethack with Flask
+# consigne de jeu
 
-Programme Python servant de base à l'évaluation par projet du cours Programme coopérants et Web Intro. 
+En arrivant sur le jeu, le joueur a le choix entre rejoindre une partie déjà existante (si il en existe une sur le serveur) ou alors creer une nouvelle partie.
 
+Si il créé une nouvelle partie, le joueur doit selectionner une difficulté, correspondant au nombre de monstres présents sur la carte.
 
-## Execution du programme 
+Une fois dans le jeu, le personnage se deplace avec les fleches presentes sur l'écran. La touche echap permet de tirer des boules de feu afin de tuer les monstres.
 
-Dans le dossier racine du dépôt, il suffit de lancer 
+Les monstres infligent des dégats de proximité. En venant les coller, le joueur perd de la vie.
 
-```bash 
-python app.py 
-```
+Un monstre tué ne disparait pas de la carte, mais laisse derriere lui un cadavre calciné. Ce dernier n'inflige plus de dégat, mais reste un obstacle infranchissable.
 
-Et ensuite dans le navigateur allez à l'url `localhost:5001` vous verrez alors apparaitre la page suivante : 
-
-![](media/demo.png)
-
-
-Vous pouvez alors déplacer le personnage (symboliser par un `@`) à l'aide des boutons de navigations ou des fleches de votre clavier. 
-
-## Description du code 
-
-Le code est assez sommaire.
-
-Dans `game_backend` vous trouverez la gestion du jeux. En l'état il y a surtout la génération de la map et la gestion du personnage pour qu'il ne puisse pas traverser les murs. 
-
-Dans `app.py` vous avez le serveur Flask qui s'occupe de faire l'interaction entre le client (la page html) et le backend de jeux. 
-
-Dans templates vous avez la page html et dans `static/js` les quelques fonctions javascript nécessaire à l'interaction (les déplacements du personnage). 
-
-## Travail à faire 
-
-Pour rappel le travail attendu est d'enrichir ce squelette de code de la manière suivante (trié par ordre croissant d'importance) : 
-
-1. Ajout de monstre/trésors/équipements apparents et/ou cachés sur la map 
-2. Ajout d'un mode multi-joueur (possibilité pour les joueurs de s'attaquer entre eux) 
-3. Amélioration de l'interface côté joueur (j'ai fait un html pas très beau à vous de faire mieux) 
-4. Système de niveau (pour le mode joueur unique) 
-5. Possibilité de sauvergarder sa partie et de revenir plus tard (pour le mode jouer unique)  
-
-Pour la notation, histoire qu'il n'y ait pas de surprise, voici les règles : 
-* Si le point (1) est traité => 10/20 
-* Si les points (1) + (2) sont traités => 13/20 
-* Si les points (1) + (2) + (3) sont traités => 15/20 
-* Si les points (1) + (2) + (3) + (4) sont traités => 18/20 
-* Si les points (1) + (2) + (3) + (4) + (5) sont traités => 20/20
-
-La date de rendu, qui est fixée dans le github classroom, est le **03/05/2021 à 12h00**. 
+Un mode de jeu silencieux est disponible : en jouant avec les fleches du clavier et non celles sur l'écran, le son du jeu ne se lance pas, ce qui evite une superposition avec les autres son deja joués par l'ordinateur.
