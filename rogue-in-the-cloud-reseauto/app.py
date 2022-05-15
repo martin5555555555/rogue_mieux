@@ -2,6 +2,7 @@ from glob import glob
 from flask import Flask, g, render_template, make_response
 from flask_socketio import SocketIO
 from flask import request
+from numpy import diff
 from pyparsing import *
 import requests
 from game_backend import Game, player
@@ -15,6 +16,7 @@ game = Game()
 
 
 number_players = 0 
+difficulte = 0
 dico_correspondance = {}
 info_partie = {'partie_en_cours': False, 'info_partie': {}}
 partie_en_cours = {}
@@ -29,8 +31,14 @@ def index():
     temp  = render_template("proposition.html", parties = partie_en_cours)    
     return temp
 
-@app.route("/newgame/<string:nom_partie>")
-def newgame(nom_partie):
+@app.route("/newgame/<string:info_partie>")
+def newgame(info_partie):
+    print(info_partie)
+    info_partie = info_partie.split('+')
+    nom_partie = info_partie[0]
+    print(nom_partie)
+    global difficulte
+    difficulte = int(info_partie[1])
     print('new game begins')
     game = Game()
     dico_correspondance = {}
@@ -39,7 +47,8 @@ def newgame(nom_partie):
     dico_correspondance[str(id_user)] = number_players
     number_players += 1
     game.add_player(str(id_user))
-    game.add_monsters("monstre_1")
+    for i in range (difficulte):
+        game.add_monsters("monstre_1")
 
     global partie_des_joueurs
     partie_des_joueurs = {id_user: nom_partie}
